@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative '../lib/fuel_counter'
+
+fuel_counter = FuelCounter.new
+weight = 0
+File.open('data/1_input.txt').each do |line|
+  weight += fuel_counter.count(line.to_i)
+end
+
+puts "Total Weight = #{weight}"
