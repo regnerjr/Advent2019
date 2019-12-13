@@ -7,4 +7,3 @@ group :development, :test do
   gem 'rubocop'
   gem 'irb'
 end
-
