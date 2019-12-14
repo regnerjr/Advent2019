@@ -3,7 +3,7 @@
 
 require_relative '../lib/program_alarm'
 
-alarm = Program_Alarm.new
+alarm = ProgramAlarm.new
 
 # Once you have a working computer, the first step is to restore the gravity
 # assist program (your puzzle input) to the "1202 program alarm" state it had
