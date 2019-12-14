@@ -1,0 +1,57 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative '../lib/program_alarm'
+
+# you need to determine what pair of inputs produces the output 19690720
+
+# The inputs should still be provided to the program by replacing the values at
+# addresses 1 and 2, just like before. In this program, the value placed in
+# address 1 is called the noun, and the value placed in address 2 is called the
+# verb. Each of the two input values will be between 0 and 99, inclusive.
+
+# Once the program has halted, its output is available at address 0, also just
+# like before. Each time you try a pair of inputs, make sure you first reset the
+# computer's memory to the values in the program (your puzzle input) - in other
+# words, don't reuse memory from a previous attempt.
+
+# Find the input noun and verb that cause the program to produce the output
+# 19690720. What is 100 * noun + verb? (For example, if noun=12 and verb=2, the
+# answer would be 1202.)
+
+# OK So we've got the initial input of the program here
+def inputs_from_file
+  input_codes = ''
+  File.open('data/2_input.txt').each do |line|
+    line = line.strip
+    input_codes = line.split(',')
+  end
+  input_codes
+end
+
+# use the input codes (array of strings) to do the rest of the work.
+
+# we want to find the "noun" "verb" pair that result in output
+
+def find_match
+  alarm = ProgramAlarm.new
+  for noun in 0..99
+    for verb in 0..99
+
+      input_codes = inputs_from_file
+      input_codes[1] = noun.to_s
+      input_codes[2] = verb.to_s
+      output = alarm.process(input_codes.join(','))
+      result = output.split(',')[0]
+
+      if result == "19690720"
+        puts "Found match Noun: #{noun}, Verb: #{verb}"
+        puts "Result: #{100 * noun.to_i + verb.to_i}"
+        exit 0
+      end
+    end
+  end
+  puts "No Match found"
+end
+
+find_match
